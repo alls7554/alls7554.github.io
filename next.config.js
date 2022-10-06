@@ -1,8 +1,15 @@
 module.exports = {
   reactStrictMode: true,
-  experimental: {
-    images: {
-      allowFutureImage: true,
-    },
+  images: {
+    loader: 'akamai',
+    path: '/',
+  },
+  exportPathMap: async function (
+    defaultPathMap,
+    { dev, dir, outDir, distDir, buildId }
+  ) {
+    return {
+      '/': { page: '/' },
+    }
   },
 }

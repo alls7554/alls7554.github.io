@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Image from 'next/future/image';
+import Image from 'next/image';
 import profileImage from '../public/profile.png';
 import Link from 'next/link';
 
@@ -10,7 +10,12 @@ const Profile = () => {
       <ImageField>
         <Link href="/">
           <a>
-            <Image src={profileImage} alt="Profile Image" height={320} style={{ alignItems: 'center' }} />
+            <Image src={profileImage} alt="Profile Image"
+              width={222}
+              height={320}
+              layout="fixed"
+              style={{ alignItems: 'center' }}
+            />
           </a>
         </Link>
       </ImageField>
@@ -69,7 +74,7 @@ const Container = styled.div`
 `;
 
 const ImageField = styled.div`
-  display: flex;
+  display: relative;
   justify-content: center;
   align-items: center;
   background-color: white;
