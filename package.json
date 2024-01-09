@@ -8,13 +8,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-      "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add -f out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
-
+    "deploy": "rm -rf node_modules/.cache && next build && next export && touch out/.nojekyll && git add -f out/ && git commit -m \"Deploy Next.js to gh-pages\" && git subtree push --prefix out origin gh-pages"
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.7",
     "next": "12.3.1",
     "react": "18.2.0",
+    "react-calendar": "^4.7.0",
     "react-dom": "18.2.0",
     "styled-components": "^5.3.6"
   },

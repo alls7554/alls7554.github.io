@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export default function Owner() {
   return (
@@ -6,7 +6,7 @@ export default function Owner() {
       <OwnerTitle>Blog By </OwnerTitle>
       <Name>Charlie</Name>
     </Container>
-  )
+  );
 }
 
 const Container = styled.div`
@@ -20,15 +20,19 @@ const Container = styled.div`
   flex: none;
   position: sticky;
   display: flex;
+
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
 `;
 
 const OwnerTitle = styled.span`
   font-family: --font-mono;
-  color: rgb(100 116 139/var(--text-opacity));
+  color: rgb(100 116 139 / var(--text-opacity));
 `;
 
 const Name = styled.span`
-  color: rgb(15 23 42/var(--text-opacity));
+  color: rgb(15 23 42 / var(--text-opacity));
   font-weight: 700;
   gap: 1.5rem;
   margin-top: 1.5rem;

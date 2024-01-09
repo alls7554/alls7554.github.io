@@ -2,28 +2,27 @@
   --text-opacity: 1;
   --border-opacity: 1;
   --ring-inset: inset;
-  --ring-color: rgb(0,0,0,.1);
+  --ring-color: rgb(0, 0, 0, 0.1);
   --ring-offset-width: 0px;
   --ring-offset-color: #fff;
   --ring-offset-shadow: inset 0 0 0 0px #fff;
   --ring-shadow: var(--ring-inset) 0 0 0 calc(1px + var(--ring-offset-width)) var(--ring-color);
   --shadow: 0 0 #0000;
-  --font-mono: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
   line-height: 1.5;
   word-break: keep-all;
   word-wrap: break-word;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   display: block;
-  background-color: #f8fafc
 }
 
 a {
@@ -36,13 +35,8 @@ a {
 }
 
 .container {
-  min-height: 100vh;
   padding: 0 0;
   display: flex;
-  /* flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  height: 100vh;
 }
 
 .main {
@@ -102,8 +96,8 @@ a {
   border-radius: 5px;
   padding: 0.75rem;
   font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New,
+    monospace;
 }
 
 .grid {
