@@ -1,105 +1,120 @@
-import React from "react";
+"use client";
+import dayjs from "dayjs";
+import React, { useEffect, useState } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-
-const lunarEvent = [
-  {
-    date: "01-12",
-    desc: "할머니 생신",
-  },
-  {
-    date: "02-25",
-    desc: "외할아버지 생신",
-  },
-  {
-    date: "03-23",
-    desc: "아빠 생신",
-  },
-  {
-    date: "04-03",
-    desc: "외할머니 생신",
-  },
-  {
-    date: "08-03",
-    desc: "이모 생신",
-  },
-  {
-    date: "09-04",
-    desc: "이모부 생신",
-  },
-  {
-    date: "10-08",
-    desc: "엄마 생신",
-  },
-  {
-    date: "11-07",
-    desc: "할아버지 제사",
-  },
-  {
-    date: "11-25",
-    desc: "삼촌 생신",
-  },
-  {
-    date: "12-13",
-    desc: "외삼촌 생신",
-  },
-];
-
-const solarEvent = [
-  {
-    date: "03-26",
-    desc: "김유신 생일",
-  },
-  {
-    date: "05-23",
-    desc: "박철오 생일",
-  },
-  {
-    date: "08-11",
-    desc: "김유진 생일",
-  },
-  {
-    date: "10-07",
-    desc: "강준영 생일",
-  },
-  {
-    date: "10-27",
-    desc: "박한솔 생일",
-  },
-];
+import styled from "styled-components";
+import { fromLunarDate } from "lunar-date-calculator";
+import familyEvtList from "../familyEvt.json";
 
 const Event = () => {
+  const [eventList, setEventList] = useState([]);
+  const [selectedYear, setSelectedYear] = useState(2024);
+
+  useEffect(() => {
+    setEventList(
+      familyEvtList.map((evt, idx) => {
+        return {
+          flag: evt.flag,
+          desc: evt.desc,
+          year: fromLunarDate(parseInt(evt.year), parseInt(evt.month), parseInt(evt.day), selectedYear).year,
+          month: fromLunarDate(parseInt(evt.year), parseInt(evt.month), parseInt(evt.day), selectedYear).month,
+          day: fromLunarDate(parseInt(evt.year), parseInt(evt.month), parseInt(evt.day), selectedYear).day,
+        };
+      })
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedYear]);
+
   return (
-    <div style={{ display: "flex" }}>
-      <div>
-        <Calendar />
-      </div>
-      <div className="tt">
-        {lunarEvent.map((evt) => {
-          return (
-            <div
-              className=""
-              key={evt.date}
-            >
-              <p>음력 : {evt.date}</p>
-              <p>{evt.desc}</p>
-            </div>
-          );
-        })}
-        {solarEvent.map((evt) => {
-          return (
-            <div
-              className=""
-              key={evt.date}
-            >
-              <p>양력 : {evt.date}</p>
-              <p>{evt.desc}</p>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    <Container>
+      <Calendar
+        formatDay={(locale, date) => dayjs(date).format("DD")}
+        locale="ko-kr"
+        next2Label={null}
+        prev2Label={null}
+        onChange={(value) => {
+          if (parseInt(dayjs(value).format("YYYY")) != selectedYear) {
+            setSelectedYear(parseInt(dayjs(value).format("YYYY")));
+          }
+        }}
+        tileContent={({ date, view }) => {
+          if (eventList.find((x) => x.year + "-" + x.month + "-" + x.day === dayjs(date).format("YYYY-M-D"))) {
+            return (
+              <>
+                <DotContainer>
+                  <Dot />
+                </DotContainer>
+              </>
+            );
+          }
+        }}
+      />
+      <CardContainer>
+        {eventList.length > 0 &&
+          eventList.map((evt, idx) => {
+            return (
+              <Card
+                className=""
+                key={idx}
+              >
+                <p>
+                  {evt.flag ? "음력" : "양력"} : {familyEvtList[idx].month}-{familyEvtList[idx].day}
+                </p>
+                <p>{evt.desc}</p>
+                {evt.flag == 1 && (
+                  <p>
+                    {selectedYear == evt.year ? selectedYear : evt.year}년 일자 :{" "}
+                    {evt.month < 10 ? "0" + evt.month : evt.month}-{evt.day < 10 ? "0" + evt.day : evt.day}
+                  </p>
+                )}
+              </Card>
+            );
+          })}
+      </CardContainer>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: #1e1e22;
+
+  @media only screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+`;
+
+const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+`;
+
+const Card = styled.div`
+  width: 45%;
+  border-radius: 1.25rem;
+  background-color: #ffffff;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 1rem;
+  margin-bottom: 10px;
+`;
+
+const DotContainer = styled.div`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateX(16px);
+`;
+
+const Dot = styled.div`
+  height: 8px;
+  width: 8px;
+  background-color: #f87171;
+  border-radius: 50%;
+  display: flex;
+  margin-left: 1px;
+`;
 
 export default Event;

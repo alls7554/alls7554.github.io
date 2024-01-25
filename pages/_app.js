@@ -1,8 +1,9 @@
-import { ThemeProvider } from '../context/themeProvider'
-import '../styles/globals.css'
+import { ThemeProvider } from "../context/themeProvider";
+import "react-calendar/dist/Calendar.css";
+import "../assets/css/globals.css";
+import "../assets/css/calendar.css";
 
 function MyApp({ Component, pageProps }) {
-
   return (
     <ThemeProvider>
       <Component {...pageProps} />
@@ -10,4 +11,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp
+export default MyApp;

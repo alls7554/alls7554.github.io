@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "babel-plugin-styled-components": "^2.0.7",
+    "dayjs": "^1.11.10",
+    "lunar-date-calculator": "^1.1.2",
     "next": "12.3.1",
     "react": "18.2.0",
     "react-calendar": "^4.7.0",
