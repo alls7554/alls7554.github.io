@@ -1,6 +1,7 @@
 .react-calendar {
   width: 100%;
   margin-bottom: 10px;
+  height: 300px;
 
   background-color: #fff;
   color: #222;
@@ -70,7 +71,8 @@ abbr[title] {
 
   abbr {
     color: #ffffff;
-    background-color: tomato;
+    background-color: black;
+    color: white;
     padding: 15%;
     font-size: 12px;
     border-radius: 50% !important;

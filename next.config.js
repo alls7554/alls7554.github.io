@@ -1,15 +1,13 @@
 module.exports = {
   reactStrictMode: true,
   images: {
-    loader: 'akamai',
-    path: '/',
+    loader: "akamai",
+    path: "/",
   },
-  exportPathMap: async function (
-    defaultPathMap,
-    { dev, dir, outDir, distDir, buildId }
-  ) {
+  exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
     return {
-      '/': { page: '/' },
-    }
+      "/": { page: "/" },
+      "/event": { page: "/event" },
+    };
   },
-}
+};

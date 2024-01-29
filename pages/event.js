@@ -5,6 +5,8 @@ import Calendar from "react-calendar";
 import styled from "styled-components";
 import { fromLunarDate } from "lunar-date-calculator";
 import familyEvtList from "../familyEvt.json";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const Event = () => {
   const [eventList, setEventList] = useState([]);
@@ -25,8 +27,21 @@ const Event = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedYear]);
 
+  const onClickDay = (evt) => {
+    let whoseEvent;
+    if ((whoseEvent = eventList.find((x) => x.year + "-" + x.month + "-" + x.day === dayjs(evt).format("YYYY-M-D")))) {
+      toast(whoseEvent.desc);
+    }
+  };
+
   return (
     <Container>
+      <StyledToastContainer
+        position="top-center"
+        autoClose={1500}
+        hideProgressBar={true}
+        newestOnTop={true}
+      />
       <Calendar
         formatDay={(locale, date) => dayjs(date).format("DD")}
         locale="ko-kr"
@@ -37,6 +52,7 @@ const Event = () => {
             setSelectedYear(parseInt(dayjs(value).format("YYYY")));
           }
         }}
+        onClickDay={onClickDay}
         tileContent={({ date, view }) => {
           if (eventList.find((x) => x.year + "-" + x.month + "-" + x.day === dayjs(date).format("YYYY-M-D"))) {
             return (
@@ -105,16 +121,24 @@ const DotContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateX(16px);
+  transform: translate(16px, 5px);
 `;
 
 const Dot = styled.div`
   height: 8px;
   width: 8px;
-  background-color: #f87171;
+  background-color: tomato;
   border-radius: 50%;
   display: flex;
   margin-left: 1px;
+`;
+
+const StyledToastContainer = styled(ToastContainer)`
+  .Toastify__toast {
+    border-radius: 12px;
+    background-color: black;
+    color: white;
+  }
 `;
 
 export default Event;
